@@ -5,6 +5,8 @@ import re
 import urllib2
 from bs4 import BeautifulSoup
 import json
+import time
+import random
 
 # dict ={}
 
@@ -34,7 +36,7 @@ def _page(url,dict):
 			except:
 				continue
 
-def mainpage(u,dict):
+def mainpage(u,dict,no):
 	html = urllib2.urlopen(u)
 	soup1 = BeautifulSoup(html,'html.parser')
 	pages = soup1.find('div',attrs={'class':'pagination'})
@@ -54,8 +56,8 @@ def mainpage(u,dict):
 		url = 'https://www.hackthissite.org/forums'+link[1:]
 		_page(url,dict)
 
-
-	with open('weLiveSecurity.json', 'w') as fp:
+	time.sleep(random.randint(1,5))	
+	with open('weLiveSecurity'+no+'.json', 'w') as fp:
 	    json.dump(dict, fp)
 
 
